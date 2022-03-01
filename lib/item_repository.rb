@@ -16,10 +16,10 @@ attr_accessor :all
     @all.find_all{|index| index.description.upcase.include?(search.upcase)}
   end
 
-  def find_all_by_merchant_id(merchant_id)
-    @all.find_all{|index| index.merchant_id == (merchant_id)}
-  end
-
+  def find_all_by_merchant_id(merch_id)
+    @all.find_all{|index| index.merchant_id.to_i == merch_id}
+  end 
+  
   def find_all_by_price(price)
    temp_price = (price*100).to_f
    new_price = BigDecimal(temp_price,4)
