@@ -177,13 +177,18 @@ class SalesAnalyst
     ((status_count.length.to_f / full_count) *  100).round(2)
   end
 
+#fails spec harness
   def invoice_paid_in_full?(id)
     to_check = transactions.find{|index| index.id == id}
-    binding.pry
     if to_check.result == :success
       return true
     else
       return false
     end
+  end
+
+  def invoice_total(invoice_id)
+    invoice_items_to_check = invoice_items.find_all{|invoice_item| invoice_item.invoice_id == invoice_id}
+    invoice_items_to_check.map{|item| (item.unit_price)*(item.quantity.to_f)}.sum
   end
 end
