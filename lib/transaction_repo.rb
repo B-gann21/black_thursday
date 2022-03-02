@@ -18,7 +18,7 @@ class TransactionRepository
   end
 
   def find_all_by_id(id_search)
-    @all.find_all{|index| index.id.to_s.include?(id_search.to_s)}
+    @all.find_all{|index| index[:id].to_s.include?(id_search.to_s)}
   end
 
   def find_all_by_invoice_id(invoice_id_search)
