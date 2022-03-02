@@ -2,21 +2,35 @@ require './lib/transaction_repo.rb'
 
 RSpec.describe TransactionRepository do
   before (:each) do
-    @transaction1 = ({
+
+    @transaction1 = Transaction.new({
       id: 1,
       credit_card_number: 1432,
-      result: "success"
+      result: "success",
+      invoice_id: 23412,
+      credit_card_expiration_date: "1212",
+      created_at: Time.now,
+      updated_at: Time.now
       })
-    @transaction2 =  ({
-      id: 2,
-      credit_card_number: 8256,
-      result: "failed"
+    @transaction2 =  Transaction.new({
+      id: 6,
+      credit_card_number: 1414,
+      result: "failed",
+      invoice_id: 23543562,
+      credit_card_expiration_date: "1111",
+      created_at: Time.now,
+      updated_at: Time.now
       })
-    @transaction3 = ({
-      id: 3,
-      credit_card_number: 8275,
-      result: "success"
+    @transaction3 =  Transaction.new({
+      id: 62,
+      credit_card_number: 4444,
+      result: "failed",
+      invoice_id: 23543565432,
+      credit_card_expiration_date: "2222",
+      created_at: Time.now,
+      updated_at: Time.now
       })
+  
     @tr = TransactionRepository.new([@transaction1, @transaction2, @transaction3])
   end
 
