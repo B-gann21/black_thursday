@@ -40,4 +40,46 @@ describe InvoiceItemRepository do
     found = iir.find_all_by_invoice_id(11)
     expect(found).to eq([@invoice_item2])
   end
+
+  it 'can create a new invoice item' do
+    sales_engine = SalesEngine.from_csv({
+      :items     => "./data/items.csv",
+      :invoices     => "./data/invoices.csv",
+      :invoice_items     => "./data/invoice_items.csv",
+      :customers     => "./data/customers.csv",
+      :transactions     => "./data/transactions.csv",
+      :merchants => "./data/merchants.csv"})
+    iir = sales_engine.invoice_items
+    attributes = {
+      item_id: 876587658765, invoice_id: 98459834765,
+      quantity: 600, unit_price: 1099,
+      created_at: Time.now, updated_at: Time.now
+    }
+    new_invoice_item = iir.create(attributes)
+
+    expect(new_invoice_item).to be_a(InvoiceItem)
+  end
+
+  it 'can update an invoice item' do
+    sales_engine = SalesEngine.from_csv({
+      :items     => "./data/items.csv",
+      :invoices     => "./data/invoices.csv",
+      :invoice_items     => "./data/invoice_items.csv",
+      :customers     => "./data/customers.csv",
+      :transactions     => "./data/transactions.csv",
+      :merchants => "./data/merchants.csv"})
+    iir = sales_engine.invoice_items
+    attributes = {
+      item_id: 876587658765, invoice_id: 98459834765,
+      quantity: 600, unit_price: 1099,
+      created_at: Time.now, updated_at: Time.now
+    }
+    new_invoice_item = iir.create(attributes)
+
+
+    iir.update(new_invoice_item.id, {unit_price: 500, quantity: 200})
+
+    expect(new_invoice_item.unit_price).to eq(500)
+    expect(new_invoice_item.quantity).to eq(200)
+  end
 end
