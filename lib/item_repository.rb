@@ -16,19 +16,24 @@ attr_accessor :all
     @all.find_all{|index| index.description.upcase.include?(search.upcase)}
   end
 
-  def find_all_by_merchant_id(merchant_id)
-    @all.find_all{|index| index.merchant_id == (merchant_id)}
-  end
-
+  def find_all_by_merchant_id(merch_id)
+    @all.find_all{|index| index.merchant_id.to_i == merch_id}
+  end 
+  
   def find_all_by_price(price)
-   temp_price = (price*100).to_f
+   temp_price = (price).to_f
    new_price = BigDecimal(temp_price,4)
    @all.find_all{|index| index.unit_price == (new_price)}
   end
+  def create(attributes)
+    new_element = attributes
+    new_element[:id] = (@all.max{|index| index.id}).id + 1
+    @all << Item.new(new_element)
+  end
 
   def find_all_by_price_in_range(range)
-    new_min = BigDecimal((range.min*100).to_f,4)
-    new_max = BigDecimal((range.max*100).to_f,4)
+    new_min = BigDecimal((range.min).to_f,4)
+    new_max = BigDecimal((range.max).to_f,4)
     new_range = (new_min..new_max )
    @all.find_all{|index| new_range.include?(index.unit_price)}
   end
