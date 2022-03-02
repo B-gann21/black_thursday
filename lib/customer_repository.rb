@@ -18,7 +18,6 @@ class CustomerRepository
     "#<#{self.class} #{@all.size} rows>"
   end
 
-
   def create(attributes)
     attributes[:id] = (@all.max{|index| index.id}).id + 1
     new_customer = Customer.new(attributes)

@@ -1,7 +1,6 @@
 require_relative 'module'
 class InvoiceItemRepository
   include IDManager
-  attr_reader :all
   def initialize(all)
     @all = all
   end
