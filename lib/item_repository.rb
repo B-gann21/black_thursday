@@ -36,7 +36,7 @@ attr_accessor :all
   def find_all_by_price_in_range(range)
     new_min = BigDecimal((range.min).to_f,4)
     new_max = BigDecimal((range.max).to_f,4)
-    new_range = (new_min..new_max )
+    new_range = (new_min..new_max)
    @all.find_all{|index| new_range.include?(index.unit_price)}
   end
   def update(id, attributes)

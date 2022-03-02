@@ -69,7 +69,7 @@ RSpec.describe ItemRepository do
   end
 
   it 'can find all items within a price range' do
-    expect(@ir.find_all_by_price_in_range(0..100)).to eq([@item1, @item2, @item3])
+    expect(@ir.find_all_by_price_in_range(0..10000)).to eq([@item1, @item2, @item3])
   end
 
   it 'can find all items that have exact merchant id' do
