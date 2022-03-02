@@ -35,7 +35,6 @@ class InvoiceRepository
       if attr == :status
         selected_instance.status = value
         selected_instance.updated_at = Time.now
-        binding.pry
       end
     end
   end

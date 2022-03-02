@@ -117,7 +117,7 @@ class SalesAnalyst
     merchants_high_in_invoices = []
     high_in_invoices.each do |item|
       @merchants.find_all do |merchant|
-        if item[0] == merchant.id.to_s
+        if item[0] == merchant.id
           merchants_high_in_invoices << merchant
         end
       end
@@ -132,7 +132,7 @@ class SalesAnalyst
     merchants_low_in_invoices = []
     low_in_invoices.each do |invoice|
       @merchants.find_all do |merchant|
-        if invoice[0] == merchant.id.to_s
+        if invoice[0] == merchant.id
           merchants_low_in_invoices << merchant
         end
       end
