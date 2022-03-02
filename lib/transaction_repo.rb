@@ -26,6 +26,6 @@ class TransactionRepository
   end
 
   def find_all_by_result(result_search)
-    @all.find_all{|index| index[:result] == result_search}
+    @all.find_all{|index| index.result == result_search}
   end
 end
