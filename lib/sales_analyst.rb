@@ -49,7 +49,7 @@ class SalesAnalyst
     items = @items.find_all{|index| index.merchant_id == merchant_id.to_s}
     total_cost = 0.0
     items.each {|index| total_cost += index.unit_price}
-    return (total_cost./(100 * number_of_items)).round(2)
+    return (total_cost./number_of_items).round(2)
   end
 
   def average_average_price_per_merchant
