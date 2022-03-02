@@ -26,9 +26,8 @@ attr_accessor :all
    @all.find_all{|index| index.unit_price == BigDecimal(temp_price, 4)}
   end
   def create(attributes)
-    new_element = attributes
-    new_element[:id] = (@all.max{|index| index.id}).id + 1
-    new_item = Item.new(new_element)
+    attributes[:id] = (@all.max{|index| index.id}).id + 1
+    new_item = Item.new(attributes)
     @all << new_item
     new_item
   end

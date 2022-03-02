@@ -1,5 +1,5 @@
 require_relative "module"
-
+require_relative 'merchant'
 class MerchantRepository
   include IDManager
 
@@ -11,15 +11,14 @@ attr_reader :all
     @all.find_all{|index| index.name.upcase.include?(search.upcase)}
   end
   def create(attributes)
-    new_element = attributes
-    new_element[:id] = (@all.max{|index| index.id}).id + 1
-    @all << Merchant.new(new_element)
+    attributes[:id] = (@all.max{|index| index.id}).id + 1
+    new_merchant = Merchant.new(attributes)
+    @all << new_merchant
+    new_merchant
   end
   def update(id, attributes)
     seleted_instance = find_by_id(id)
-    attributes.each do |key, value|
-      seleted_instance.name = value
-    end 
+    seleted_instance.name = attributes[:name]
   end
 #inspect method is required for spec harness to run
   def inspect
