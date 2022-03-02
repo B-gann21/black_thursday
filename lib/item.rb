@@ -1,12 +1,9 @@
 require 'bigdecimal'
 
 class Item
+  attr_accessor :description, :unit_price, :name, :updated_at
   attr_reader :id,
-              :name,
-              :description,
-              :unit_price,
               :created_at,
-              :updated_at,
               :merchant_id
   def initialize(details)
     @id = details[:id].to_i

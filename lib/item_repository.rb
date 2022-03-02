@@ -37,6 +37,21 @@ attr_accessor :all
     new_range = (new_min..new_max )
    @all.find_all{|index| new_range.include?(index.unit_price)}
   end
+  def update(id, attributes)
+    selected_instance = find_by_id(id)
+    attributes.each do |attr, value|
+      if attr == :description 
+        selected_instance.description = value
+        selected_instance.updated_at = Time.now
+      elsif attr == :unit_price 
+        selected_instance.unit_price = value
+        selected_instance.updated_at = Time.now
+      elsif attr == :name
+        selected_instance.name = value
+        selected_instance.updated_at = Time.now
+      end 
+    end 
+  end
 
   # def update(id, attributes)
   #   @all.each do |index|
