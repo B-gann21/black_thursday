@@ -17,8 +17,8 @@ attr_reader :all
     new_merchant
   end
   def update(id, attributes)
-    seleted_instance = find_by_id(id)
-    seleted_instance.name = attributes[:name] if attributes[:name]
+    selected_instance = find_by_id(id)
+    selected_instance.name = attributes[:name] if attributes[:name]
   end
 #inspect method is required for spec harness to run
   def inspect
