@@ -18,7 +18,7 @@ attr_reader :all
   end
   def update(id, attributes)
     seleted_instance = find_by_id(id)
-    seleted_instance.name = attributes[:name]
+    seleted_instance.name = attributes[:name] if attributes[:name]
   end
 #inspect method is required for spec harness to run
   def inspect
