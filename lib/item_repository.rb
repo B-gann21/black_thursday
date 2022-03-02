@@ -25,6 +25,11 @@ attr_accessor :all
    new_price = BigDecimal(temp_price,4)
    @all.find_all{|index| index.unit_price == (new_price)}
   end
+  def create(attributes)
+    new_element = attributes
+    new_element[:id] = (@all.max{|index| index.id}).id + 1
+    @all << Item.new(new_element)
+  end
 
   def find_all_by_price_in_range(range)
     new_min = BigDecimal((range.min).to_f,4)
