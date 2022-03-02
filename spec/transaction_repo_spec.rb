@@ -2,21 +2,33 @@ require './lib/transaction_repo.rb'
 
 RSpec.describe TransactionRepository do
   before (:each) do
-    @transaction1 = ({
+    @transaction1 = Transaction.new({
       id: 1,
+      invoice_id: 374,
+      created_at: Time.now,
+      updated_at: Time.now,
       credit_card_number: 1432,
+      credit_card_expiration_date: "1212",
       result: "success"
       })
-    @transaction2 =  ({
-      id: 2,
-      credit_card_number: 8256,
-      result: "failed"
-      })
-    @transaction3 = ({
-      id: 3,
-      credit_card_number: 8275,
-      result: "success"
-      })
+      @transaction2 = Transaction.new({
+        id: 2,
+        invoice_id: 375,
+        created_at: Time.now,
+        updated_at: Time.now,
+        credit_card_number: "1433",
+        credit_card_expiration_date: "1211",
+        result: "success"
+        })
+        @transaction3 = Transaction.new({
+          id: 3,
+          invoice_id: 376,
+          created_at: Time.now,
+          updated_at: Time.now,
+          credit_card_number: "1433",
+          credit_card_expiration_date: "1211",
+          result: "failed"
+          })
     @tr = TransactionRepository.new([@transaction1, @transaction2, @transaction3])
   end
 
@@ -33,11 +45,11 @@ RSpec.describe TransactionRepository do
   end
 
   it 'can find all transactions by credit_card_number' do
-    expect(@tr.find_all_by_credit_card_number(5)).to eq([@transaction2, @transaction3])
+    expect(@tr.find_all_by_credit_card_number("1433")).to eq([@transaction2, @transaction3])
   end
 
   it 'can find all transactions by result' do
-    expect(@tr.find_all_by_result("success")).to eq([@transaction1, @transaction3])
+    expect(@tr.find_all_by_result(:success)).to eq([@transaction1, @transaction2])
   end
 
   it 'can create a new transaction' do
