@@ -2,9 +2,13 @@ require_relative 'transaction'
 require_relative 'module'
 
 class TransactionRepository
+  attr_reader :all
   include IDManager
 
-  attr_reader :all
+  def inspect
+    "#<#{self.class} #{@all.size} rows>"
+  end
+  
   def initialize(transactions)
     @all = transactions
   end
