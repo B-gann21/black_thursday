@@ -51,7 +51,7 @@ RSpec.describe TransactionRepository do
   end
 
   it 'can find all transactions by result' do
-    expect(@tr.find_all_by_result("success")).to eq([@transaction1, @transaction3])
+    expect(@tr.find_all_by_result(:failed)).to eq([@transaction2, @transaction3])
   end
 
   it 'can create a new transaction' do
