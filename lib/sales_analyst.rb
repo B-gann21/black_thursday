@@ -191,4 +191,5 @@ class SalesAnalyst
     invoice_items_to_check = invoice_items.find_all{|invoice_item| invoice_item.invoice_id == invoice_id}
     invoice_items_to_check.map{|item| (item.unit_price)*(item.quantity.to_f)}.sum
   end
+  
 end
