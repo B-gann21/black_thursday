@@ -177,4 +177,13 @@ class SalesAnalyst
     ((status_count.length.to_f / full_count) *  100).round(2)
   end
 
+  def invoice_paid_in_full?(id)
+    to_check = transactions.find{|index| index.id == id}
+    binding.pry
+    if to_check.result == :success
+      return true
+    else
+      return false
+    end
+  end
 end
