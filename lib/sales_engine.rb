@@ -10,7 +10,7 @@ require_relative 'invoice_item_repository'
 require_relative 'customers'
 require_relative 'customer_repository'
 require_relative 'transaction'
-
+require_relative 'transaction_repo'
 require 'csv'
 
 class SalesEngine

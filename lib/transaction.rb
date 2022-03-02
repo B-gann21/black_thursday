@@ -1,15 +1,10 @@
 class Transaction
-
+  attr_accessor :credit_card_number, :credit_card_expiration_date, :result, :updated_at
   attr_reader :id,
               :invoice_id,
-              :credit_card_number,
-              :credit_card_expiration_date,
-              :result,
-              :created_at,
-              :updated_at
-
+              :created_at
   def initialize(attributes)
-    @id = attributes[:id]
+    @id = attributes[:id].to_f
     @invoice_id = attributes[:invoice_id]
     @credit_card_number = attributes[:credit_card_number]
     @credit_card_expiration_date = attributes[:credit_card_expiration_date]

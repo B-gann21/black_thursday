@@ -6,7 +6,7 @@ describe Item do
                 :id          => 1,
                 :name        => "Pencil",
                 :description => "You can use it to write things",
-                :unit_price  => BigDecimal(10.99,4),
+                :unit_price  => 1099,
                 :created_at  => Time.now,
                 :updated_at  => Time.now,
                 :merchant_id => 2
@@ -28,8 +28,8 @@ describe Item do
       expect(i.description).to eq("You can use it to write things")
     end
 
-    it 'has a price' do
-      expect(i.unit_price).to eq(0.1099e2)
+    it 'has a BigDecimal price' do
+      expect(i.unit_price).to be_a(BigDecimal)
     end
 
     it 'has a Time for the date it was created' do
