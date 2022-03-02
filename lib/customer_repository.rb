@@ -1,5 +1,6 @@
 require_relative "module"
 class CustomerRepository
+  attr_reader :all
   include IDManager
 
   def initialize(info)
@@ -7,11 +8,13 @@ class CustomerRepository
   end
 
   def find_all_by_first_name(first_name)
-    @all.find_all{|index| index.first_name == first_name}
+    @all.find_all{|index| index.first_name.upcase.include?(first_name.upcase)}
   end
 
   def find_all_by_last_name(last_name)
-    @all.find_all{|index| index.last_name == last_name}
+    @all.find_all{|index|
+
+       index.last_name.upcase.include?(last_name.upcase)}
   end
 
   def inspect

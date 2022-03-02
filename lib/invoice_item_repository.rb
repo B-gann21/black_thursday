@@ -10,6 +10,10 @@ class InvoiceItemRepository
     @all.find_all { |item| item.invoice_id == invoice_id}
   end
 
+  def find_all_by_item_id(item_id)
+    @all.find_all { |item| item.item_id == item_id}
+  end
+
   def create(attributes)
     attributes[:id] = @all.length + 1
     new_invoice_item = InvoiceItem.new(attributes)
