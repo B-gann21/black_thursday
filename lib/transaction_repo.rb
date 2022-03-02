@@ -22,7 +22,7 @@ class TransactionRepository
   end
 
   def find_all_by_credit_card_number(card_search)
-    @all.find_all{|index| index[:credit_card_number].to_s.include?(card_search.to_s)}
+    @all.find_all{|index| index.credit_card_number.to_s == card_search}
   end
 
   def find_all_by_result(result_search)
