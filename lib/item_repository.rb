@@ -1,6 +1,7 @@
 
 require 'pry'
 require_relative 'module'
+require_relative 'item'
 class ItemRepository
 include IDManager
 attr_accessor :all
@@ -18,17 +19,18 @@ attr_accessor :all
 
   def find_all_by_merchant_id(merch_id)
     @all.find_all{|index| index.merchant_id.to_i == merch_id}
-  end 
-  
+  end
+
   def find_all_by_price(price)
    temp_price = (price).to_f
-   new_price = BigDecimal(temp_price,4)
-   @all.find_all{|index| index.unit_price == (new_price)}
+   @all.find_all{|index| index.unit_price == BigDecimal(temp_price, 4)}
   end
   def create(attributes)
     new_element = attributes
     new_element[:id] = (@all.max{|index| index.id}).id + 1
-    @all << Item.new(new_element)
+    new_item = Item.new(new_element)
+    @all << new_item
+    new_item
   end
 
   def find_all_by_price_in_range(range)
@@ -40,17 +42,17 @@ attr_accessor :all
   def update(id, attributes)
     selected_instance = find_by_id(id)
     attributes.each do |attr, value|
-      if attr == :description 
+      if attr == :description
         selected_instance.description = value
         selected_instance.updated_at = Time.now
-      elsif attr == :unit_price 
+      elsif attr == :unit_price
         selected_instance.unit_price = value
         selected_instance.updated_at = Time.now
       elsif attr == :name
         selected_instance.name = value
         selected_instance.updated_at = Time.now
-      end 
-    end 
+      end
+    end
   end
 
   # def update(id, attributes)

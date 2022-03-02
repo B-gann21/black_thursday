@@ -42,7 +42,7 @@ RSpec.describe ItemRepository do
   it 'can find all items that include fragment in description' do
     expect(@ir.find_all_with_description("phone")).to eq([@item2, @item3])
   end
-  
+
   it "can create an item" do
     sales_engine = SalesEngine.from_csv({
       :items     => "./data/items.csv",
@@ -65,7 +65,7 @@ RSpec.describe ItemRepository do
   end
 
   it 'can find all items that have exact price' do
-    expect(@ir.find_all_by_price(10.99)).to eq([@item1, @item3])
+    expect(@ir.find_all_by_price(1099)).to eq([@item1, @item3])
   end
 
   it 'can find all items within a price range' do
