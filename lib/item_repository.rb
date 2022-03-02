@@ -21,7 +21,7 @@ attr_accessor :all
   end 
   
   def find_all_by_price(price)
-   temp_price = (price*100).to_f
+   temp_price = (price).to_f
    new_price = BigDecimal(temp_price,4)
    @all.find_all{|index| index.unit_price == (new_price)}
   end
