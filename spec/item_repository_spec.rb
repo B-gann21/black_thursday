@@ -76,6 +76,29 @@ RSpec.describe ItemRepository do
     expect(@ir.find_all_by_merchant_id(2)).to eq([@item2, @item3])
   end
 
+  it 'can update an item' do
+    sales_engine = SalesEngine.from_csv({
+      :items     => "./data/items.csv",
+      :invoices     => "./data/invoices.csv",
+      :invoice_items     => "./data/invoice_items.csv",
+      :customers     => "./data/customers.csv",
+      :transactions     => "./data/transactions.csv",
+      :merchants => "./data/merchants.csv"})
+      ir = sales_engine.items
+      attributes =  {
+        name: "Capita Defenders of Awesome 2018",
+        description: "This board both rips and shreds",
+        unit_price: BigDecimal(399.99, 5),
+        created_at: Time.now,
+        updated_at: Time.now,
+        merchant_id: 25
+      }
+      item4 = ir.create(attributes)
 
+      ir.update(item4.id, {name: "Big Bad Bouncy Ball", description: "Bounces manacingly high"})
+
+      expect(item4.name).to eq("Big Bad Bouncy Ball")
+      expect(item4.description).to eq("Bounces manacingly high")
+  end
 
 end
