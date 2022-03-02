@@ -1,7 +1,7 @@
 require_relative 'module'
 class InvoiceRepository
   include IDManager
-
+  attr_accessor :status, :updated_at
   attr_reader :all
   def initialize(info)
     @all = info
@@ -27,6 +27,17 @@ class InvoiceRepository
 
   def inspect
     "#<#{self.class} #{@all.size} rows>"
+  end
+
+  def update(id, attributes)
+    selected_instance = find_by_id(id)
+    attributes.each do |attr, value|
+      if attr == :status
+        selected_instance.status = value
+        selected_instance.updated_at = Time.now
+        binding.pry
+      end
+    end
   end
 
 end

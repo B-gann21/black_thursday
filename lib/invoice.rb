@@ -7,8 +7,8 @@ class Invoice
       @customer_id = info[:customer_id].to_i
       @merchant_id = info[:merchant_id].to_i
       @status = info[:status].to_sym
-      @created_at = info[:created_at].to_s
-      @updated_at = info[:updated_at].to_s
+      @created_at = info[:created_at]
+      @updated_at = info[:updated_at]
     end
 
 end
