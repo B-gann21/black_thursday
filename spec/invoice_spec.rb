@@ -23,7 +23,7 @@ RSpec.describe Invoice do
     expect(i.id).to eq(6)
     expect(i.customer_id).to eq(7)
     expect(i.merchant_id).to eq(8)
-    expect(i.status).to eq("pending")
+    expect(i.status).to eq(:pending)
     expect(i.created_at).to eq("2009-02-07")
     expect(i.updated_at).to eq("2014-03-15")
   end

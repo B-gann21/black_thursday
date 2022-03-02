@@ -53,16 +53,16 @@ class SalesEngine
   end
 
   def invoices
-    InvoiceRepository.new(@invoice_array)
+    InvoiceRepository.new(@invoices_array)
   end
   def invoice_items
     InvoiceItemRepository.new(@invoice_items_array)
   end
   def customers
-    CustomerRepository.new(@customer_array)
+    CustomerRepository.new(@customers_array)
   end
   def transactions
-    TransactionRepository.new(@transaction_array)
+    TransactionRepository.new(@transactions_array)
   end
   # def file_reader(filepath, key)
   #   reader = CSV.open(filepath, headers: true, header_converters: :symbol)
