@@ -49,7 +49,7 @@ class SalesAnalyst
     items = @items.find_all{|index| index.merchant_id == merchant_id.to_s}
     total_cost = 0.0
     items.each {|index| total_cost += index.unit_price}
-    return (total_cost./(100 * number_of_items)).round(2)
+    return (total_cost./number_of_items).round(2)
   end
 
   def average_average_price_per_merchant
@@ -117,7 +117,7 @@ class SalesAnalyst
     merchants_high_in_invoices = []
     high_in_invoices.each do |item|
       @merchants.find_all do |merchant|
-        if item[0] == merchant.id.to_s
+        if item[0] == merchant.id
           merchants_high_in_invoices << merchant
         end
       end
@@ -132,7 +132,7 @@ class SalesAnalyst
     merchants_low_in_invoices = []
     low_in_invoices.each do |invoice|
       @merchants.find_all do |merchant|
-        if invoice[0] == merchant.id.to_s
+        if invoice[0] == merchant.id
           merchants_low_in_invoices << merchant
         end
       end
@@ -173,8 +173,8 @@ class SalesAnalyst
 
   def invoice_status(status)
     full_count = @invoices.count
-    status_count = @invoices.count {|invoice| invoice.status == status.to_s}
-    ((status_count.to_f / full_count) *  100).round(2)
+    status_count = invoices.find_all{|invoice| invoice.status == status}
+    ((status_count.length.to_f / full_count) *  100).round(2)
   end
 
 end
