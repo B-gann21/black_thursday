@@ -14,7 +14,7 @@ RSpec.describe TransactionRepository do
       })
     @transaction2 =  Transaction.new({
       id: 6,
-      credit_card_number: 1414,
+      credit_card_number: 1514,
       result: "failed",
       invoice_id: 23543562,
       credit_card_expiration_date: "1111",
@@ -22,8 +22,8 @@ RSpec.describe TransactionRepository do
       updated_at: Time.now
       })
     @transaction3 =  Transaction.new({
-      id: 62,
-      credit_card_number: 4444,
+      id: 7,
+      credit_card_number: 1514,
       result: "failed",
       invoice_id: 23543565432,
       credit_card_expiration_date: "2222",
@@ -43,11 +43,11 @@ RSpec.describe TransactionRepository do
   end
 
   it 'can find all by a specific transactions id' do
-    expect(@tr.find_all_by_id(2)).to eq([@transaction2])
+    expect(@tr.find_all_by_id(6)).to eq([@transaction2])
   end
 
   it 'can find all transactions by credit_card_number' do
-    expect(@tr.find_all_by_credit_card_number(5)).to eq([@transaction2, @transaction3])
+    expect(@tr.find_all_by_credit_card_number("1514")).to eq([@transaction2, @transaction3])
   end
 
   it 'can find all transactions by result' do
