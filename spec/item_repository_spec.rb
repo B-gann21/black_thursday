@@ -42,7 +42,7 @@ RSpec.describe ItemRepository do
   it 'can find all items that include fragment in description' do
     expect(@ir.find_all_with_description("phone")).to eq([@item2, @item3])
   end
-  
+
   it "can create an item" do
     sales_engine = SalesEngine.from_csv({
       :items     => "./data/items.csv",
@@ -65,17 +65,40 @@ RSpec.describe ItemRepository do
   end
 
   it 'can find all items that have exact price' do
-    expect(@ir.find_all_by_price(10.99)).to eq([@item1, @item3])
+    expect(@ir.find_all_by_price(1099)).to eq([@item1, @item3])
   end
 
   it 'can find all items within a price range' do
-    expect(@ir.find_all_by_price_in_range(0..100)).to eq([@item1, @item2, @item3])
+    expect(@ir.find_all_by_price_in_range(0..10000)).to eq([@item1, @item2, @item3])
   end
 
   it 'can find all items that have exact merchant id' do
     expect(@ir.find_all_by_merchant_id(2)).to eq([@item2, @item3])
   end
 
+  it 'can update an item' do
+    sales_engine = SalesEngine.from_csv({
+      :items     => "./data/items.csv",
+      :invoices     => "./data/invoices.csv",
+      :invoice_items     => "./data/invoice_items.csv",
+      :customers     => "./data/customers.csv",
+      :transactions     => "./data/transactions.csv",
+      :merchants => "./data/merchants.csv"})
+      ir = sales_engine.items
+      attributes =  {
+        name: "Capita Defenders of Awesome 2018",
+        description: "This board both rips and shreds",
+        unit_price: BigDecimal(399.99, 5),
+        created_at: Time.now,
+        updated_at: Time.now,
+        merchant_id: 25
+      }
+      item4 = ir.create(attributes)
 
+      ir.update(item4.id, {name: "Big Bad Bouncy Ball", description: "Bounces manacingly high"})
+
+      expect(item4.name).to eq("Big Bad Bouncy Ball")
+      expect(item4.description).to eq("Bounces manacingly high")
+  end
 
 end

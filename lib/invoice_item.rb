@@ -1,7 +1,7 @@
 require 'bigdecimal'
 class InvoiceItem
-  attr_reader :id, :item_id, :invoice_id, :quantity,
-              :unit_price, :created_at, :updated_at
+  attr_accessor :unit_price, :quantity, :updated_at
+  attr_reader :id, :item_id, :invoice_id, :created_at
   def initialize(info)
     @id = info[:id].to_i
     @item_id = info[:item_id].to_i

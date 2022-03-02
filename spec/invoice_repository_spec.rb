@@ -37,4 +37,40 @@ RSpec.describe InvoiceRepository do
     expect(invoice_repo.find_all_by_customer_id(65)).to eq([])
   end
 
+  it 'can create an invoice' do
+    sales_engine = SalesEngine.from_csv({
+      :items     => "./data/items.csv",
+      :invoices     => "./data/invoices.csv",
+      :invoice_items     => "./data/invoice_items.csv",
+      :customers     => "./data/customers.csv",
+      :transactions     => "./data/transactions.csv",
+      :merchants => "./data/merchants.csv"})
+    ir = sales_engine.invoices
+    attributes = {
+      customer_id: 876587658765, merchant_id: 98459834765,
+      status: "pending",  created_at: Time.now, updated_at: Time.now
+    }
+    new_invoice = ir.create(attributes)
+    expect(new_invoice).to be_a(Invoice)
+  end
+
+  it 'can update an invoice' do
+    sales_engine = SalesEngine.from_csv({
+      :items     => "./data/items.csv",
+      :invoices     => "./data/invoices.csv",
+      :invoice_items     => "./data/invoice_items.csv",
+      :customers     => "./data/customers.csv",
+      :transactions     => "./data/transactions.csv",
+      :merchants => "./data/merchants.csv"})
+    ir = sales_engine.invoices
+    attributes = {
+      customer_id: 876587658765, merchant_id: 98459834765,
+      status: "pending",  created_at: Time.now, updated_at: Time.now
+    }
+    new_invoice = ir.create(attributes)
+    ir.update(new_invoice.id, {status: "shipped"})
+
+    expect(new_invoice.status).to eq("shipped")
+  end
+
 end

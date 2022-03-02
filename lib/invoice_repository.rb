@@ -21,8 +21,9 @@ class InvoiceRepository
 
   def create(attributes)
     attributes[:id] = @all.length + 1
-    new_item = Invoice.new(attributes)
-    @all << new_item
+    new_invoice = Invoice.new(attributes)
+    @all << new_invoice
+    new_invoice
   end
 
   def inspect
