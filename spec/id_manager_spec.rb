@@ -1,4 +1,4 @@
-require './lib/module'
+require './lib/id_manager'
 require './lib/merchant_repository'
 
 RSpec.describe IDManager do

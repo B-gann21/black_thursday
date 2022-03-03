@@ -1,4 +1,4 @@
-require_relative "module"
+require_relative "id_manager"
 require_relative 'merchant'
 class MerchantRepository
   include IDManager

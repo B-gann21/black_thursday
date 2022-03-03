@@ -1,5 +1,5 @@
 require_relative 'transaction'
-require_relative 'module'
+require_relative 'id_manager'
 
 class TransactionRepository
   attr_reader :all

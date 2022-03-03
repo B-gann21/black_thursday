@@ -1,6 +1,6 @@
 
 require 'pry'
-require_relative 'module'
+require_relative 'id_manager'
 require_relative 'item'
 class ItemRepository
 include IDManager
