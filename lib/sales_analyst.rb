@@ -200,17 +200,11 @@ class SalesAnalyst
   # end
   
   def merchants_with_only_one_item
-  # def find_merchant_ids_who_have_one_item
-    item_id = []
-    array = []
-    single_merch = []
-    merch_hash = Hash.new(0)
+    item_id = [], array = [],single_merch = [], merch_hash = Hash.new(0)
     @items.find_all {|item| item_id << item.merchant_id}
     item_id.each {|id| merch_hash[id] += 1}
     merch_hash.each {|key, value|  single_merch << key if value == 1}
-    #struggling here
     @merchants.each {|merchant| array << merchant if single_merch.include?(merchant.id.to_s)}
-    # require "pry"; binding.pry
     array
   end
 
