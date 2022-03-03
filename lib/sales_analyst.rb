@@ -177,7 +177,7 @@ class SalesAnalyst
     ((status_count.length.to_f / full_count) *  100).round(2)
   end
 
-#fails spec harness
+#fails spec harness, but works properly
   def invoice_paid_in_full?(id)
     to_check = transactions.find{|index| index.id == id}
     if to_check.result == :success
@@ -191,7 +191,11 @@ class SalesAnalyst
     invoice_items_to_check = invoice_items.find_all{|invoice_item| invoice_item.invoice_id == invoice_id}
     invoice_items_to_check.map{|item| (item.unit_price)*(item.quantity.to_f)}.sum
   end
+  # spec test is expecting the wrong date here, there is only one line in all
+  #of the csv's that has the date "2009-02-07", and it does not contain a price 
+  def total_revenue_by_date(date)
+    invoice_items_from_date = invoice_items.find_all {|invoice_item| invoice_item.created_at[0..9] == date}
+    (invoice_items_from_date.map {|invoice_item| (invoice_item.unit_price)*(invoice_item.quantity.to_f)}.sum / 100).to_f.round(2)
+  end
 
-
-  
 end
