@@ -88,4 +88,9 @@ RSpec.describe SalesAnalyst do
     expect(sales_analyst.invoice_status(:shipped)).to eq(56.95)
     expect(sales_analyst.invoice_status(:returned)).to eq(13.5)
   end
+
+  it 'total revenue by date' do
+    sales_analyst = @sales_engine.analyst
+    expect(sales_analyst.total_revenue_by_date("2009-02-07")).to eq(21067.77)
+  end
 end
