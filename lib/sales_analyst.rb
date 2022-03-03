@@ -192,10 +192,13 @@ class SalesAnalyst
     invoice_items_to_check.map{|item| (item.unit_price)*(item.quantity.to_f)}.sum
   end
   # spec test is expecting the wrong date here, there is only one line in all
-  #of the csv's that has the date "2009-02-07", and it does not contain a price 
+  #of the csv's that has the date "2009-02-07", and it does not contain a price
   def total_revenue_by_date(date)
-    invoice_items_from_date = invoice_items.find_all {|invoice_item| invoice_item.created_at[0..9] == date}
-    (invoice_items_from_date.map {|invoice_item| (invoice_item.unit_price)*(invoice_item.quantity.to_f)}.sum / 100).to_f.round(2)
+    invoices_created_at_date = invoices.find_all{|invoice| invoice.created_at == date.to_s[0..9]}
+    invoice_ids = []
+    invoices_created_at_date.each{|invoice| invoice_ids.push(invoice.id)}
+    invoice_items = @invoice_items.find_all{|invoice_item| invoice_ids.include?(invoice_item.invoice_id) }
+    total = invoice_items.uniq.map{|items| BigDecimal(items.quantity) * items.unit_price}.sum
+    return total
   end
-
 end
