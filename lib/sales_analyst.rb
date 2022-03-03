@@ -201,4 +201,31 @@ class SalesAnalyst
     total = invoice_items.uniq.map{|items| BigDecimal(items.quantity) * items.unit_price}.sum
     return total
   end
+
+  def invoice_id_by_merchant_id
+    merchants_with_invoices = Hash.new
+    invoices.each do |invoice|
+      if merchants_with_invoices.key?(invoice.merchant_id)
+        merchants_with_invoices[invoice.merchant_id].push(invoice.id)
+      else
+        merchants_with_invoices[invoice.merchant_id] = [invoice.id]
+      end
+    end
+    return merchants_with_invoices
+  end
+
+  def top_revenue_earners(top_number = 20)
+    result = Hash.new
+     merchants_with_invoices = invoice_id_by_merchant_id
+     merchants_with_invoices.each_pair do |merchant, invoice|
+       total = 0.0
+       invoice.each{|invoicee|
+         total += invoice_total(invoicee)}
+       new_key= merchants.find{|index| index.id == merchant}
+       result[new_key] = total
+    end
+    new_array = result.sort_by{|key,value|value}.reverse
+    new_new_array = new_array.map{|cell| cell[0]}
+    return new_new_array[0..top_number - 1]
+  end
 end

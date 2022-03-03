@@ -91,6 +91,6 @@ RSpec.describe SalesAnalyst do
 
   it 'total revenue by date' do
     sales_analyst = @sales_engine.analyst
-    expect(sales_analyst.total_revenue_by_date("2012-03-27")).to eq(600169.37)
+    expect(sales_analyst.total_revenue_by_date("2009-02-07")).to eq(21067.77)
   end
 end
