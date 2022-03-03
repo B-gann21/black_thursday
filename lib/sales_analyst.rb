@@ -193,17 +193,12 @@ class SalesAnalyst
   end
 
   def merchants_with_pending_invoices
-    unique_merchant_id = []
     pending_invoices = invoices.find_all{|invoice| invoice.status == :pending}
-    binding.pry
-    pending_invoices.each do |invoice|
-      if unique_merchant_id.include? invoice.merchant_id
-        break
-      else
-        unique_merchant_id.push(invoice.merchant_id)
-      end
+    pending_invoice_merchant_ids = pending_invoices.map {|invoice| invoice.merchant_id}
+    merchants.find_all do |merchant|
+      pending_invoice_merchant_ids.include?(merchant.id)
     end
-    binding.pry
+
   end
 
 end
