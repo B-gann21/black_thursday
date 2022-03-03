@@ -191,6 +191,16 @@ class SalesAnalyst
     invoice_items_to_check = invoice_items.find_all{|invoice_item| invoice_item.invoice_id == invoice_id}
     invoice_items_to_check.map{|item| (item.unit_price)*(item.quantity.to_f)}.sum
   end
+
+  def merchants_with_only_one_item
+    item_id = [], array = [],single_merch = [], merch_hash = Hash.new(0)
+    @items.find_all {|item| item_id << item.merchant_id}
+    item_id.each {|id| merch_hash[id] += 1}
+    merch_hash.each {|key, value|  single_merch << key if value == 1}
+    @merchants.each {|merchant| array << merchant if single_merch.include?(merchant.id.to_s)}
+    array
+  end
+
   # spec test is expecting the wrong date here, there is only one line in all
   #of the csv's that has the date "2009-02-07", and it does not contain a price
   def total_revenue_by_date(date)

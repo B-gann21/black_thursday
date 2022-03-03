@@ -89,6 +89,12 @@ RSpec.describe SalesAnalyst do
     expect(sales_analyst.invoice_status(:returned)).to eq(13.5)
   end
 
+  it "merchants with only one item" do
+    sales_analyst = @sales_engine.analyst
+    expect(sales_analyst.merchants_with_only_one_item.count).to eq 243 
+  end
+
+
   it 'total revenue by date' do
     sales_analyst = @sales_engine.analyst
     expect(sales_analyst.total_revenue_by_date("2009-02-07")).to eq(21067.77)
