@@ -1,4 +1,4 @@
-require_relative "module"
+require_relative "id_manager"
 class CustomerRepository
   attr_reader :all
   include IDManager

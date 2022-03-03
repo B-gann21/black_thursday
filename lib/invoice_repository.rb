@@ -1,4 +1,4 @@
-require_relative 'module'
+require_relative 'id_manager'
 class InvoiceRepository
   include IDManager
   attr_accessor :status, :updated_at

@@ -1,4 +1,4 @@
-require_relative 'module'
+require_relative 'id_manager'
 class InvoiceItemRepository
   include IDManager
   attr_reader :all
