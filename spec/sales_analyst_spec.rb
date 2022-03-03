@@ -93,4 +93,23 @@ RSpec.describe SalesAnalyst do
     sales_analyst = @sales_engine.analyst
     expect(sales_analyst.total_revenue_by_date("2009-02-07")).to eq(21067.77)
   end
+
+  it 'can organize invoice ids by merchant ids' do
+    sales_analyst = @sales_engine.analyst
+    expected = sales_analyst.invoice_id_by_merchant_id
+    expect(expected.length).to eq(475)
+    expect(expected.class).to eq(Hash)
+  end
+
+  it 'can return the top revenue earners' do
+    sales_analyst = @sales_engine.analyst
+    expected = sales_analyst.top_revenue_earners
+    expected2 = sales_analyst.top_revenue_earners(5)
+    expect(expected.length).to eq(20)
+    expect(expected.first.class).to eq(Merchant)
+    expect(expected.last.id).to eq(12334669)
+    expect(expected2.length).to eq(5)
+    expect(expected2.first.class).to eq(Merchant)
+    expect(expected2.last.id).to eq(12335938)
+  end
 end
