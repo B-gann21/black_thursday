@@ -191,13 +191,7 @@ class SalesAnalyst
     invoice_items_to_check = invoice_items.find_all{|invoice_item| invoice_item.invoice_id == invoice_id}
     invoice_items_to_check.map{|item| (item.unit_price)*(item.quantity.to_f)}.sum
   end
-  #   merch_w_1_item = []
-  #   find_merchant_ids_who_have_one_item.each do |id_of_merch|
-  #     @merchants.find_all {|merchant| << merchant if find_merchant_ids_who_have_one_item.contains?(merchant.id)}
-  #     require "pry"; binding.pry
-  # 
-  #   end 
-  # end
+
   
   def merchants_with_only_one_item
     item_id = [], array = [],single_merch = [], merch_hash = Hash.new(0)
@@ -208,6 +202,5 @@ class SalesAnalyst
     array
   end
 
-  # merch_id = []
   
 end
