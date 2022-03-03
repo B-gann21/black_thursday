@@ -192,6 +192,18 @@ class SalesAnalyst
     invoice_items_to_check.map{|item| (item.unit_price)*(item.quantity.to_f)}.sum
   end
 
+  def merchants_with_pending_invoices
+    unique_merchant_id = []
+    pending_invoices = invoices.find_all{|invoice| invoice.status == :pending}
+    binding.pry
+    pending_invoices.each do |invoice|
+      if unique_merchant_id.include? invoice.merchant_id
+        break
+      else
+        unique_merchant_id.push(invoice.merchant_id)
+      end
+    end
+    binding.pry
+  end
 
-  
 end
